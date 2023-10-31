@@ -1,0 +1,20 @@
+{
+  "name": "keypress-game",
+  "version": "1.0.0",
+  "description": "Kepress Typing Game",
+  "main": "app.js",
+  "repository": "https://github.com/ALEXANDRE-P-A/keypress-typing-game",
+  "scripts": {
+    "build": "npm install",
+    "start": "node app.js"
+  },
+  "author": "Alexandre PA",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "log4js": "^6.9.1",
+    "mongodb": "^6.2.0",
+    "serve-favicon": "^2.5.0"
+  }
+}

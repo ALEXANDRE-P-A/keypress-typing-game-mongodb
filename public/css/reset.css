@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  background-color: inherit;
+  border: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}

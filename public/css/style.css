@@ -1,0 +1,831 @@
+/* ----- 輝くテキストとボタン用のキーフレーム ----- */
+@keyframes shinning {
+  0% {
+    transform: scale(0) rotate(25deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1) rotate(25deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(50) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+#untyped.shadow {
+  text-shadow: 1px 1px 3px #000;
+  transition: 1s;
+  text-decoration: underline;
+}
+
+/* ----- ゲーム詳細ボタン ----- */
+.game-details {
+  background-color: #384878;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  color: #fff;
+  border: 1px solid #777;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  padding: 10px;
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 4;
+  transition: .5s;
+}
+
+.game-details:hover {
+  background-color: lightgreen;
+  color: #555;
+  transition: .5s;
+}
+
+.game-details:active {
+  background-color: red;
+  color: #fff;
+  transition: .5s;
+}
+
+.game-details.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s;
+}
+
+/* ----- body全体 ----- */
+body {
+  max-width: 810px;
+  margin: 0 auto;
+  background-image: url('../img/typing-vintage.jpg');
+  background-size: 20%;
+  background-repeat: round;
+}
+
+/* ----- main領域 ----- */
+main {
+  width: 100%;
+}
+
+/* ----- 制限時間表示領域 ----- */
+.timer-area {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #666;
+}
+
+/* ----- 制限時間の書式 ----- */
+.time-left {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.8em;
+}
+
+/* ----- 開始前のカウントダウン時制の背景 ----- */
+.timer-area.counting {
+  background-color: red;
+}
+
+/* ----- テキスト表示領域 ----- */
+.wrap {
+  width: 100%;
+  height: 300px;
+  text-align: center;
+  background-color: rgb(150,150,150);
+  font-weight: bold;
+  color: #fff;
+  font-size: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ----- アクセス時のエフェクト ----- */
+#wrap.initial-effect {
+  background-color: lightgreen;
+}
+
+/* ----- 正しくタイプされた場合のテキスト ----- */
+.typed {
+  color: lightgreen;
+}
+
+/* ----- ミスタイプの場合の背景PC ----- */
+.mistyped {
+  background-color: red;
+}
+
+/* ----- アラートメッセージ表示領域 ----- */
+.alert-msg-area {
+  width: 100%;
+  text-align: center;
+}
+
+/* ----- アラートメッセージ書式 ----- */
+.alert-msg {
+  opacity: 1;
+  font-weight: bold;
+  padding: 0;
+  color: blue;
+  width: fit-content;
+  margin: 15px auto;
+  padding: 5px;
+  background-color: rgba(255,255,255,.7);
+  border: 1px solid;
+}
+
+/* ----- ミスタイプの場合のアラートメッセージ ----- */
+.alert-msg.incorrect {
+  color: red;
+}
+
+/* ----- 正タイプの場合のアラートメッセージ ----- */
+.alert-msg.correct {
+  color: green;
+}
+
+/* ----- ゲーム終了後のメッセージ ----- */
+.alert-msg.final {
+  border: none;
+  color: #000;
+  background-color: inherit;
+  padding: 0;
+  margin: 28px auto 5px;
+  font-size: 16px;
+} 
+
+/* ----- アラートメッセージの非表示PC ----- */
+.alert-msg.hide {
+  opacity: 0;
+}
+
+/* ----- ボタンとテキスト入力の領域 ----- */
+.type-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* ----- ボタンとテキスト入力の個別領域 ----- */
+.game-input-area, .start-btn-area, .try-again-btn-area {
+  width: 90%;
+  position: absolute;
+  opacity: 1;
+  pointer-events: auto;
+  transition: .3s;
+}
+
+/* ----- テキストを入力する領域 ----- */
+.game-input-area{
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+/* ----- 開始前カウントダウン時のテキストを入力する領域 ----- */
+.game-input-area.shade {
+  opacity: .5;
+  pointer-events: none;
+  transition: .3s;
+}
+
+/* ----- ボタンとテキスト入力の個別領域の非表示 ----- */
+.game-input-area.hide, .start-btn-area.hide, .try-again-btn-area.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: .3s;
+}
+
+/* ----- テキスト入力(後日編集必要) ----- */
+#text-field {
+  display: none;
+}
+
+/* ----- テキスト入力領域左右の矢印(PCでは非表示) ----- */
+.arrows {
+  display: none;
+}
+
+/* ----- 輝くボタン from here ----- */
+.shinny-btn {
+  position: relative;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #384878;
+  overflow: hidden;
+  padding: 10px 50px;
+  margin: 0 auto;
+  border: 1px solid #777;
+  border-radius: 5px;
+}
+
+.shinny-btn::after {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 50px;
+  height: 50px;
+  background-image: linear-gradient(100deg,rgba(255,255,255,0)10%,rgba(255,255,255,1)100%,rgba(255,255,255,0)0%);
+
+  /* アニメーション */
+  animation-name: shinning;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.shinny-btn:disabled {
+  opacity: .5;
+}
+/* ----- 輝くボタン till here ----- */
+
+/* ----- ゲーム終了後のスコアテーブル ----- */
+.score-table-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.8);
+  z-index: 5;
+  opacity: 1;
+  pointer-events: auto;
+  transition: .8s;
+  height: fit-content;
+  text-align: center;
+  padding: 20px 120px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* ----- ゲーム終了後のスコアテーブルの非表示 ----- */
+.score-table-area.hide {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ----- スコア各項目の表示領域 ----- */
+.accurancy {
+  margin: 5% auto 0;
+  color: #fff;
+  width: 45%;
+  background-color: rgba(0,0,0,.5);
+  border: 1px solid rgba(255,255,255,.2);
+  padding: 10px;
+  text-align: center;
+}
+
+/* ----- スコア各項目の表示領域のタイトル ----- */
+.accurancy .title {
+  font-size: 16px;
+  border: 1px solid rgba(255,255,255,.2);
+  padding: 10px;
+}
+
+/* ----- スコア各項目の表示領域のタイピングの正確性(%) ----- */
+.accurancy .percentage {
+  font-size: 16px;
+  letter-spacing: .2em;
+  margin-top: 2px;
+  border: 1px solid rgba(255,255,255,.2);
+  padding: 10px;
+}
+
+/* ----- ゲーム終了後のスコア画面の閉じるボタン ----- */
+.score-area-close {
+  color: #fff;
+  font-size: 30px;
+  width: 100%;
+  margin: 0 calc(50% - 25px);
+}
+
+  /* ----- ゲーム終了後の詳細スコアテーブル ----- */
+.score-table {
+  width: 98%;
+  color: #fff;
+  margin: 5% auto;
+  background-color: rgba(0,0,0,.5);
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.2);
+  text-align: center;
+}
+/* ----- 詳細スコアテーブルの見出し ----- */
+thead tr th {
+  border: 1px solid rgba(255,255,255,.2);
+  padding: 10px 0;
+}
+
+/* ----- 詳細スコアテーブルの内容 ----- */
+.type-result th, .type-result td {
+  padding: 10px 0;
+  border: 1px solid rgba(255,255,255,.2);
+}
+
+/* ----- ランクの書式 ----- */
+.result-details {
+  display: none;
+  width: fit-content;
+  text-decoration: underline;
+  font-weight: bold;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto 15px;
+}
+
+/* ----- ランクの書式のアニメーションPC ----- */
+.result-details::after {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 50px;
+  height: 50px;
+  background-image: linear-gradient(100deg,rgba(255,255,255,0)10%,rgba(255,255,255,1)100%,rgba(255,255,255,0)0%);
+
+  /* アニメーション */
+  animation-name: shinning;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.result-details strong {
+  cursor: pointer ;
+}
+
+/* ----- 表示のときのモーダルウィンドゥ ----- */
+#check-window {
+  background-color: #fff;
+  width: 650px;
+  padding: 10px 30px;
+  border-radius: 0 0 5px 5px;
+  border: solid rgba(0,0,0,.3);
+  border-width: 0 1px 1px 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transition: transform 0.8s;
+  z-index: 4;
+  text-align: left;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+/* ----- 表示のときのモーダルウィンドゥのタイトル ----- */
+#check-window p {
+  text-align: center;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+/* ----- 表示のときのモーダルウィンドゥの確認項目の領域 ----- */
+#check-window div, #check-window ol {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* ----- 表示のときのモーダルウィンドゥの確認項目およびチェック欄 ----- */
+#check-window div p, #check-window ol li  {
+  text-align: left;
+  line-height: 30px;
+  font-size: 12px;
+  margin: 5px 0;
+  width: 50%;
+}
+
+/* ----- 表示のときのモーダルウィンドゥの閉じるボタン ----- */
+.check-window-close {
+  margin: 0 0 0 calc(100% - 20px);
+}
+
+/* ----- 非表示のときのモーダルウィンドゥ ----- */
+#check-window.hidden {
+  transform: translate(0,-500px);
+}
+
+/* ----- モーダルウィンドゥのチェックボックス ----- */
+.check-input {
+  transform: scale(1);
+  margin-right: 5px;
+}
+
+/* ----- gif画像領域 ----- */
+#gif-img {
+  opacity: 0;
+  width: 100%;
+  background-color: rgba(0,0,0,.9);
+  margin: 10px auto 0;
+  transition: 3s;
+  padding: 5px 0;
+  text-align: center;
+  position: relative;
+}
+
+/* ----- gif画像領域の動画 ----- */
+#gif-img img {
+  width: 90%;
+  margin: 0 auto;
+  border: .5px solid #000;
+  position: inherit;
+  z-index: 2;
+}
+
+/* ----- スマホ用の縦方向のサンプル動画(非表示) ----- */
+#vertical-frame {
+  display: none;
+  pointer-events: none;
+}
+
+/* ----- スマホ用の横方向のサンプル動画(非表示) ----- */
+#horizontal-frame {
+  display: none;
+  pointer-events: none;
+}
+
+/* ----- サンプル動画 ----- */
+#gif-img.show {
+  opacity: 1;
+  transition: 3s;
+}
+
+/* ----- フッター ----- */
+footer {
+  margin-top: 15px;
+  width: 100%;
+  text-align: center;
+  color: rgba(0,0,0,1);
+  background-color: #fff;
+  font-size: .5em;
+  padding: 2.5px 0;
+}
+
+/* ----- スマホ表示 ----- */
+@media screen and (max-width: 767px) and (min-height: 500px) {
+  /* ----- ボディ全体SP ----- */
+  body {
+    font-size: 1em;
+    width: 100%;
+    background-size: 100%;
+  }
+
+  .timer-area.onkeyboard {
+    margin-top: 131px;
+  }
+
+  /* ----- 制限時間の書式SP ----- */
+  .time-left {
+    font-size: 1.5em;
+  }
+
+  /* ----- テキスト表示領域SP ----- */
+  .wrap {
+    width: auto;
+    height: auto;
+    margin-top: 25px;
+    padding: 40px 0;
+    font-size: 24px;
+    line-height: 54px;
+  }
+
+  /* ----- アラートメッセージ表示領域SP ----- */
+  .alert-msg-area {
+    margin-top: 25px; 
+  }
+
+  /* ----- アラートメッセージ書式SP ----- */
+  .alert-msg {
+    padding: 5px;
+  }
+
+  /* ----- アラートメッセージの中身SP ----- */
+  .alert-msg.final {
+    border: none;
+    color: #000;
+    background-color: inherit;
+    padding: 0;
+  } 
+
+  /* ----- ボタンとテキスト入力の領域SP ----- */
+  .type-area {
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 25px;
+  }
+
+  /* ----- ボタンとテキスト入力の個別領域SP ----- */
+  .game-input-area, .start-btn-area, .try-again-btn-area {
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  /* ----- テキストを入力する領域SP ----- */
+  .game-input-area{
+    padding: 0;
+  }
+
+  /* ----- テキスト入力SP ----- */
+  #text-field {
+    display: inline;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  /* ----- テキスト入力領域左右の矢印(PCでは非表示)SP ----- */
+  .arrows {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 28px;
+    color: #384878;
+  }
+
+  /* ----- 輝くボタンSP from here ----- */
+  .shinny-btn {
+    width: 70%;
+    padding: 10px 0;
+    border-radius: 3px;
+  }
+  /* ----- 輝くボタンSP till here ----- */
+
+  /* ----- ゲーム終了後のスコアテーブルSP ----- */
+  .score-table-area {
+    padding: 0; 
+  }
+
+  /* ----- スコア各項目の表示領域SP ----- */
+  .accurancy {
+    width: 75%;
+  }
+
+  /* ----- ゲーム終了後のスコア画面の閉じるボタンSP ----- */
+  .score-area-close {
+    margin-top: 19.5px;
+    width: fit-content;
+  }
+
+  /* ----- ゲーム終了後の詳細スコアテーブルSP ----- */
+  .score-table {
+    width: 80%;
+  }
+
+  /* ----- 表示のときのモーダルウィンドゥSP ----- */
+  #check-window {
+    width: 100%;
+    padding: 30px 0;
+    border-width: 0 0 1px 0;
+  }
+
+  /* ----- 表示のときのモーダルウィンドゥのタイトルSP ----- */
+  #check-window p {
+    margin: 15px 0;
+  }
+
+  /* ----- 表示のときのモーダルウィンドゥの確認項目の領域SP ----- */
+  #check-window div, #check-window ol {
+    width: 90%;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  /* ----- 表示のときのモーダルウィンドゥの確認項目およびチェック欄SP ----- */
+  #check-window div p, #check-window ol li  {
+    width: auto;
+  }
+
+  /* ----- 非表示のときのモーダルウィンドゥSP ----- */
+  #check-window.hidden {
+    transform: translate(0,-700px);
+  }
+
+  /* ----- モーダルウィンドゥのチェックボックスSP ----- */
+  .check-input {
+    transform: scale(2);
+    margin-right: 15px;
+  }
+
+  /* ----- gif画像領域SP ----- */
+  #gif-img {
+    width: 90%;
+    height: 250px;
+    margin: 25px auto;
+  }
+
+  /* ----- gif画像領域の動画SP ----- */
+  #gif-img img {
+    width: auto;
+    height: 100%;
+  }
+
+  /* ----- SP用のサンプル動画(表示)SP ----- */
+  #vertical-frame {
+    display: block;
+  }
+
+  /* ----- サンプル動画(非表示)SP ----- */
+  #pc-frame, #horizontal-frame {
+    display: none;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  /* ----- body全体SP(Sideways) ----- */
+  body {
+    position: relative;
+    width: 100%;
+    max-width: inherit;
+  }
+
+  /* ----- main領域SP(Sideways) ----- */
+  main {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  /* ----- 制限時間表示領域SP(Sideways) ----- */
+  .timer-area {
+    width: 10%;
+    height: 36px;
+    padding: 10px 0;
+  }
+
+  .timer-area.onkeyboard {
+    margin-top: 0;
+  }
+
+  /* ----- 制限時間の書式SP(Sideways) ----- */
+  .time-left {
+    font-size: 1.5em;
+  }
+
+  /* ----- テキスト表示領域SP(Sideways) ----- */
+  .wrap {
+    width: 50%;
+    height: 36px;
+    padding: 10px 0;
+    font-size: 24px;
+    margin-top: 0;
+  }
+
+  /* ----- アラートメッセージ表示領域SP(Sideways) ----- */
+  .alert-msg-area {
+    margin-top: 0;
+    position: absolute;
+    top: 75px;
+  }
+
+  /* ----- アラートメッセージ書式SP(Sideways) ----- */
+  .alert-msg {
+    font-size: 16px;
+    padding: 5px;
+    margin: 0 auto;
+  }
+
+  /* ----- ボタンとテキスト入力の領域SP(Sideways) ----- */
+  .type-area {
+    width: 40%;
+    height: 36px;
+    padding: 10px 0;
+    margin-top: 0;
+  }
+
+  /* ----- ボタンとテキスト入力の個別領域SP(Sideways) ----- */
+  .game-input-area, .start-btn-area, .try-again-btn-area {
+    width: 90%;
+    top: inherit;
+    left: inherit;
+    padding: 0;
+  }
+
+  /* ----- テキスト入力SP(Sideways) ----- */
+  #text-field {
+    display: inline;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  /* ----- テキスト入力領域左右の矢印(PCでは非表示)SP(Sideways) ----- */
+  .arrows {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 28px;
+    color: #384878;
+  }
+
+  /* 輝くボタンSP(Sideways) from here */
+  .shinny-btn {
+    width: 70%;  
+  }
+  /* ----- 輝くボタンSP(Sideways) till here ----- */
+
+  /* ----- ゲーム終了後のスコアテーブルSP(Sideways) ----- */
+  .score-table-area {
+    padding: 0; 
+  }
+
+  /* ----- スコア各項目の表示領域SP(Sideways) ----- */
+  .accurancy {
+    width: 75%;
+  }
+
+  /* ----- ゲーム終了後のスコア画面の閉じるボタンSP(Sideways) ----- */
+  .score-area-close {
+    margin-top: 19.5px;
+    width: fit-content;
+  }
+
+  /* ----- ゲーム終了後の詳細スコアテーブルSP(Sideways) ----- */
+  .score-table {
+    width: 80%;
+  }
+
+  /* ----- ランクの書式SP(Sideways) ----- */
+  .result-details {
+    margin: 0 auto;
+    font-size: 16px;
+  }
+
+  /* ----- 表示のときのモーダルウィンドゥSP(Sideways) ----- */
+  #check-window {
+    padding: 10px 0;
+  }
+
+  /* ----- 表示のときのモーダルウィンドゥの確認項目の領域SP(Sideways) ----- */
+  #check-window ol {
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    list-style-position: inside;
+  }
+
+  /* ----- 表示のときのモーダルウィンドゥの確認項目およびチェック欄SP(Sideways) ----- */
+  #check-window ol li  {
+    width: 50%;
+  }
+
+  /* ----- 表示のときのモーダルウィンドゥの閉じるボタンSP(Sideways) ----- */
+  .check-window-close {
+    margin: 0 0 0 calc(100% - 30px);
+  }
+
+  /* ----- 非表示のときのモーダルウィンドゥSP(Sideways) ----- */
+  #check-window.hidden {
+    transform: translate(0,-800px);
+  }
+
+  /* ----- モーダルウィンドゥのチェックボックスSP(Sideways) ----- */
+  .check-input {
+    transform: scale(2);
+    margin-right: 15px;
+  }
+
+  /* ----- gif画像領域SP(Sideways) ----- */
+  #gif-img {
+    width: 90%;
+    margin: 75px auto 0;
+  }
+
+  #gif-img.show.after {
+    margin-top: 180px;
+  }
+
+  #pc-frame, #vertical-frame {
+    display: none;
+  }
+
+  #horizontal-frame {
+    display: inline;
+  }
+}

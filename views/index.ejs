@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>Keypress Game</title>
+    <%- include("./_share/metadata.ejs") %>
+    <%- include("./_share/stylesheets.ejs") %>
+  </head>
+  <body>
+    <div id="texts" style="display: none;">
+      <%= data %>
+    </div>
+
+    <!-- ----- ゲーム詳細ボタン ----- -->
+    <a href="http://atoviag.com/works-11.html" id="game-details" class="game-details">
+      <p>Game</p>
+      <p>Details</p>
+    </a>
+
+    <!-- ----- モーダルウィンドゥ ----- -->
+    <div id="check-window" class="hidden">
+      <p>開始をする前にルールをご確認してください</p>
+      <div>
+        <ol>
+          <li>英列キーボードのみを使用します</li>
+          <li>制限時間は60秒です</li>
+          <li>誤った文字列の入力は受け付けません</li>
+          <li>全ての文字の入力は評価の対象となります</li>
+          <li>大文字と小文字の入力は区別します</li>
+          <li>Game Start!ボタンを押した３秒後に開始します</li>
+          <li>ゲーム終了後にスコアが表示されます</li>
+        </ol>
+      </div>
+      <p><input type="checkbox" class="check-input" id="check0" onclick="isChecked(0)"><label for="check0">上記のルールを確認いたしました</label></p>
+      <button id="game-start-btn" class="shinny-btn" disabled>Game Start!</button>
+      <div>
+        <span class="material-icons check-window-close" id="close">close</span>
+      </div>
+    </div>
+
+    <!-- ----- スコア画面 ----- -->
+    <div id="score-table-area" class="score-table-area hide">
+      <span class="material-icons score-area-close accurancy" id="close">close</span>
+      <div class="accurancy">
+        <p class="title">Type accurancy</p>
+        <p id="percentage" class="percentage"></p>
+      </div>
+      <div class="accurancy">
+        <p id="your-skill" class="title"></p>
+      </div>
+      <table id="score-table" class="score-table">
+        <thead>
+          <tr>
+            <th>Typed text</th>
+            <th>Cost time</th>
+          </tr>
+        </thead>
+        <tbody id="type-result" class="type-result"></tbody>
+      </table>
+    </div>
+
+    <main>
+      <!-- ----- 制限時間領域 -----  -->
+      <section id="timer-area" class="timer-area">
+        <p id="time-left" class="time-left">60</p>
+      </section>
+
+      <!-- ----- テキスト表示領域 ----- -->
+      <section id="wrap" class="wrap">
+        <div>
+          <span id="typed" class="typed"></span><span id="untyped"></span>
+        </div>
+      </section>
+
+      <!-- ------ アラートメッセージ表示領域 ------ -->
+      <section class="alert-msg-area">
+        <p id="alert-msg" class="alert-msg">英列キーボードを使用してください</p>
+        <p id="result-details" class="result-details"><strong>成績を確認するにはここをクリック</strong></p>
+      </section>
+      
+      <!-- ----- 入力アクション領域 ----- -->
+      <section class="type-area">
+        <!-- ----- テキスト入力及ぶ確定ボタンエリア領域 ----- -->
+        <div class="game-input-area hide">
+          <span class="material-symbols-outlined arrows">east</span><input type="text" id="text-field" class="text-field"><span class="material-symbols-outlined arrows">west</span>
+        </div>
+
+        <!-- ----- スタートボタン領域 ----- -->
+        <div class="start-btn-area">
+          <button id="start" class="shinny-btn">Start</button>
+        </div>
+
+        <!-- ----- もう一度ボタン領域 ----- -->
+        <div class="try-again-btn-area hide">
+          <button id="try-again" class="shinny-btn">Try Again</button>
+        </div>
+      </section>
+
+      <section id="gif-img" class="show">
+
+        <img id="pc-frame" src="/public/resources/playSample.gif" alt="PC Sample Gif Img">
+
+        <img id="vertical-frame" src="/public/resources/playSampleSP.gif" alt="SP Sample Gif Img">
+
+        <img id="horizontal-frame" src="/public/resources/playSampleSPside.gif" alt="SP Sideways Sample Gif Img">
+        
+      </section>
+    </main>
+    <footer>
+      <p>&copy; Keypress Game 2023 All rights reserved</p>
+    </footer>
+    <%- include("./_share/javascripts.ejs") %>
+  </body>
+</html>
