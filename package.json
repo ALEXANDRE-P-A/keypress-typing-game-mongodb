@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Kepress Typing Game",
   "main": "app.js",
-  "repository": "https://github.com/ALEXANDRE-P-A/keypress-typing-game",
+  "repository": "https://github.com/ALEXANDRE-P-A/keypress-typing-game-mongodb",
   "scripts": {
     "build": "npm install",
     "start": "node app.js"
